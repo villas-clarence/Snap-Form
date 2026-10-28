@@ -51,7 +51,7 @@
                 @endif
 
                 <section class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md shadow-slate-900/5 sm:rounded-3xl">
-                    <div class="h-2 bg-indigo-600"></div>
+                    <div class="h-2 bg-cyan-400"></div>
                     <div class="space-y-4 px-6 py-7 sm:px-8 sm:py-9">
                         <div>
                             <x-input-label for="title" value="Form title" class="sr-only" />
@@ -76,7 +76,7 @@
 
                 <div id="question-list" class="space-y-4">
                     @foreach ($builderQuestions as $index => $question)
-                        <section class="question-card relative z-0 space-y-5 rounded-2xl border border-slate-200 border-l-4 border-l-indigo-600 bg-white p-6 shadow-md shadow-slate-900/5 transition hover:border-slate-300 hover:border-l-indigo-600 sm:rounded-3xl sm:p-8">
+                        <section class="question-card relative z-0 space-y-5 rounded-2xl border border-slate-200 border-l-4 border-l-cyan-400 bg-white p-6 shadow-md shadow-slate-900/5 transition hover:border-slate-300 hover:border-l-cyan-500 sm:rounded-3xl sm:p-8">
                             @if (! empty($question['id']))
                                 <input type="hidden" name="questions[{{ $index }}][id]" value="{{ $question['id'] }}">
                             @endif
@@ -120,7 +120,7 @@
                 </div>
 
                 <template id="question-template">
-                    <section class="question-card relative z-0 space-y-5 rounded-2xl border border-slate-200 border-l-4 border-l-indigo-600 bg-white p-6 shadow-md shadow-slate-900/5 transition hover:border-slate-300 hover:border-l-indigo-600 sm:rounded-3xl sm:p-8">
+                    <section class="question-card relative z-0 space-y-5 rounded-2xl border border-slate-200 border-l-4 border-l-cyan-400 bg-white p-6 shadow-md shadow-slate-900/5 transition hover:border-slate-300 hover:border-l-cyan-500 sm:rounded-3xl sm:p-8">
                         <div class="flex items-center justify-between gap-4">
                             <div class="flex items-center gap-3">
                                 <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-50 text-sm font-bold text-indigo-700"><span class="question-number"></span></span>
