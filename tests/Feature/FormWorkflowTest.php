@@ -41,10 +41,15 @@ class FormWorkflowTest extends TestCase
         $this->assertSame($owner->id, $form->user_id);
         $this->assertSame(['Morning', 'Afternoon'], $form->questions[1]->options);
 
-        $this->get(route('dashboard'))->assertOk()->assertSee('Workshop signup');
+        $this->get(route('dashboard'))
+            ->assertOk()
+            ->assertSee('Workshop signup')
+            ->assertDontSee('<svg viewBox="0 0 316 316"', false);
         $this->get(route('forms.show', $form))->assertOk()->assertSee('Session');
         $this->get(route('forms.edit', $form))
             ->assertOk()
+            ->assertDontSee('Dashboard')
+            ->assertDontSee('<svg viewBox="0 0 316 316"', false)
             ->assertSee('Workshop signup')
             ->assertSee('Short answer')
             ->assertSee('Paragraph')
@@ -83,6 +88,8 @@ class FormWorkflowTest extends TestCase
         $this->actingAs($owner)
             ->get(route('forms.create'))
             ->assertOk()
+            ->assertDontSee('Dashboard')
+            ->assertDontSee('<svg viewBox="0 0 316 316"', false)
             ->assertSee('Create a form');
 
         $this->get(route('public.show', $form->slug))
