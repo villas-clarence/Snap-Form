@@ -1,4 +1,4 @@
-<section x-data="{ editing: $errors->updatePassword->any() }">
+<section x-data="{ editing: @js($errors->updatePassword->any()) }">
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Update Password') }}
