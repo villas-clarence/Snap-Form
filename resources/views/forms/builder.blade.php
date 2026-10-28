@@ -30,7 +30,7 @@
                             </svg>
                         </span>
                         <div>
-                            <h1 class="mt-1 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">{{ $form ? __('Edit your form') : __('Create a form') }}</h1>
+                            <h1 class="mt-1 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">{{ $form ? __('Edit your form') : __('Create a form') }}</h1>
                         </div>
                     </div>
                     <p class="mt-4 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
