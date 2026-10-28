@@ -1,4 +1,4 @@
-<section>
+<section x-data="{ editing: $errors->updatePassword->any() }">
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Update Password') }}
@@ -9,7 +9,14 @@
         </p>
     </header>
 
-    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
+    <div x-show="!editing" class="mt-6">
+        <p class="text-sm text-gray-600">{{ __('Password') }}: <span aria-label="{{ __('Password hidden') }}">••••••••</span></p>
+        <button type="button" x-on:click="editing = true" class="mt-4 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray-700 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            {{ __('Edit') }}
+        </button>
+    </div>
+
+    <form x-ref="form" x-show="editing" x-cloak method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('put')
 
@@ -33,6 +40,9 @@
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <button type="button" x-on:click="$refs.form.reset(); editing = false" class="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray-700 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                {{ __('Cancel') }}
+            </button>
 
             @if (session('status') === 'password-updated')
                 <p

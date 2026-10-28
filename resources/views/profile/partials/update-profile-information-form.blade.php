@@ -1,4 +1,4 @@
-<section>
+<section x-data="{ editing: @js($errors->has('name') || $errors->has('email')) }">
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Profile Information') }}
@@ -13,7 +13,21 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <div x-show="!editing" class="mt-6 space-y-4">
+        <div>
+            <p class="text-sm font-medium text-gray-500">{{ __('Name') }}</p>
+            <p class="mt-1 text-sm text-gray-900">{{ $user->name }}</p>
+        </div>
+        <div>
+            <p class="text-sm font-medium text-gray-500">{{ __('Email') }}</p>
+            <p class="mt-1 text-sm text-gray-900">{{ $user->email }}</p>
+        </div>
+        <button type="button" x-on:click="editing = true" class="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray-700 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            {{ __('Edit') }}
+        </button>
+    </div>
+
+    <form x-ref="form" x-show="editing" x-cloak method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
 
@@ -49,6 +63,9 @@
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <button type="button" x-on:click="$refs.form.reset(); editing = false" class="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray-700 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                {{ __('Cancel') }}
+            </button>
 
             @if (session('status') === 'profile-updated')
                 <p

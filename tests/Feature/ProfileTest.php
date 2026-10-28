@@ -18,7 +18,14 @@ class ProfileTest extends TestCase
             ->actingAs($user)
             ->get('/profile');
 
-        $response->assertOk();
+        $response
+            ->assertOk()
+            ->assertDontSee('Dashboard')
+            ->assertDontSee('<svg viewBox="0 0 316 316"', false)
+            ->assertSee('Edit')
+            ->assertSee('Cancel')
+            ->assertSee('x-show="editing"', false)
+            ->assertSee('x-show="!editing"', false);
     }
 
     public function test_profile_information_can_be_updated(): void
