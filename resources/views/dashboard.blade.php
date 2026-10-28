@@ -37,7 +37,7 @@
             <section aria-label="{{ __('Workspace overview') }}" class="grid gap-4 sm:grid-cols-3">
                 <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
                     <div class="flex items-center justify-between">
-                        <p class="text-sm font-medium text-slate-500">{{ __('Total forms') }}</p>
+                        <p class="text-base font-extrabold text-slate-950">{{ __('Total forms') }}</p>
                         <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
                             <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                                 <path d="M5.5 3.75h6l3 3v9.5H5.5a1 1 0 0 1-1-1v-10a1.5 1.5 0 0 1 1-1.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
@@ -51,7 +51,7 @@
 
                 <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
                     <div class="flex items-center justify-between">
-                        <p class="text-sm font-medium text-slate-500">{{ __('Accepting responses') }}</p>
+                        <p class="text-base font-extrabold text-slate-950">{{ __('Accepting responses') }}</p>
                         <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
                             <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                                 <circle cx="10" cy="10" r="6.25" stroke="currentColor" stroke-width="1.5" />
@@ -65,7 +65,7 @@
 
                 <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
                     <div class="flex items-center justify-between">
-                        <p class="text-sm font-medium text-slate-500">{{ __('Verified responses') }}</p>
+                        <p class="text-base font-extrabold text-slate-950">{{ __('Verified responses') }}</p>
                         <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 text-cyan-700">
                             <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                                 <path d="M4.25 15.75V10m5.75 5.75V4.25m5.75 11.5V7.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
@@ -80,7 +80,7 @@
             <section x-data="{ search: '', filter: 'all' }" class="space-y-5">
                 <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                     <div>
-                        <h2 class="text-xl font-semibold tracking-tight text-slate-950">{{ __('Your forms') }}</h2>
+                        <h2 class="text-xl font-bold tracking-tight text-slate-950">{{ __('Your forms') }}</h2>
                         <p class="mt-1 text-sm text-slate-500">{{ __('Manage forms and keep an eye on incoming responses.') }}</p>
                     </div>
                     @if ($forms->isNotEmpty())
