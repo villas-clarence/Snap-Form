@@ -182,7 +182,7 @@
                         </span>
                         <h3 class="mt-5 text-lg font-semibold text-slate-950">{{ __('Your first form starts here') }}</h3>
                         <p class="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-500">{{ __('Build a form, share it on your local network, and collect verified responses. Your forms will be easy to manage from this dashboard.') }}</p>
-                        <a href="{{ route('forms.create') }}" class="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        <a href="{{ route('forms.create') }}" class="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                             <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                                 <path d="M10 4v12m6-6H4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
                             </svg>
