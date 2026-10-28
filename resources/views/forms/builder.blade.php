@@ -50,7 +50,7 @@
                     @method('PUT')
                 @endif
 
-                <section class="relative space-y-5 overflow-hidden rounded-2xl border border-slate-200 border-l-4 border-l-cyan-400 bg-white p-5 shadow-md shadow-slate-900/5 transition hover:border-slate-300 hover:border-l-cyan-500 sm:rounded-3xl sm:p-7">
+                <section class="relative space-y-5 rounded-2xl border border-slate-200 border-l-4 border-l-cyan-400 bg-white p-5 shadow-md shadow-slate-900/5 transition hover:border-slate-300 hover:border-l-cyan-500 sm:rounded-3xl sm:p-7">
                     <div class="space-y-4">
                         <div>
                             <x-input-label for="title" value="Form title" class="sr-only" />
@@ -239,6 +239,7 @@
             document.getElementById('add-question').addEventListener('click', () => {
                 const html = template.innerHTML.replaceAll('__INDEX__', String(nextIndex++));
                 list.insertAdjacentHTML('beforeend', html);
+                window.Alpine.initTree(list.lastElementChild);
                 refreshQuestions();
             });
 
