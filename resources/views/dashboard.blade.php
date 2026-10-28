@@ -21,7 +21,7 @@
                 <div class="absolute -bottom-40 right-1/3 h-72 w-72 rounded-full bg-cyan-400/10 blur-3xl"></div>
                 <div class="relative flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between">
                     <div class="max-w-2xl">
-                        <p class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-indigo-300">{{ __('Your workspace') }}</p>
+                        <p class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-cyan-300">{{ __('Your workspace') }}</p>
                         <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">{{ __('Good to see you, :name', ['name' => auth()->user()->name]) }}</h1>
                         <p class="mt-3 max-w-xl text-sm leading-6 text-slate-300 sm:text-base">{{ __('Create forms, share them with your network, and keep track of every verified response.') }}</p>
                     </div>
