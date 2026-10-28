@@ -97,13 +97,13 @@
 
                 @if ($forms->isNotEmpty())
                     <div class="flex flex-wrap gap-2" role="group" aria-label="{{ __('Filter forms') }}">
-                        <button type="button" x-on:click="filter = 'all'" x-bind:aria-pressed="filter === 'all'" x-bind:class="filter === 'all' ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-100'" class="rounded-full border px-4 py-2 text-xs font-semibold transition focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        <button type="button" x-on:click="filter = 'all'" x-bind:aria-pressed="filter === 'all'" x-bind:class="filter === 'all' ? 'border-cyan-200 bg-cyan-400 text-slate-950' : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-100'" class="rounded-full border px-4 py-2 text-xs font-semibold transition focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2">
                             {{ __('All') }} <span class="ms-1 opacity-75">{{ $forms->count() }}</span>
                         </button>
-                        <button type="button" x-on:click="filter = 'active'" x-bind:aria-pressed="filter === 'active'" x-bind:class="filter === 'active' ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-100'" class="rounded-full border px-4 py-2 text-xs font-semibold transition focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        <button type="button" x-on:click="filter = 'active'" x-bind:aria-pressed="filter === 'active'" x-bind:class="filter === 'active' ? 'border-cyan-200 bg-cyan-400 text-slate-950' : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-100'" class="rounded-full border px-4 py-2 text-xs font-semibold transition focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2">
                             {{ __('Active') }} <span class="ms-1 opacity-75">{{ $activeFormsCount }}</span>
                         </button>
-                        <button type="button" x-on:click="filter = 'archived'" x-bind:aria-pressed="filter === 'archived'" x-bind:class="filter === 'archived' ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-100'" class="rounded-full border px-4 py-2 text-xs font-semibold transition focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        <button type="button" x-on:click="filter = 'archived'" x-bind:aria-pressed="filter === 'archived'" x-bind:class="filter === 'archived' ? 'border-cyan-200 bg-cyan-400 text-slate-950' : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-100'" class="rounded-full border px-4 py-2 text-xs font-semibold transition focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2">
                             {{ __('Archived') }} <span class="ms-1 opacity-75">{{ $archivedFormsCount }}</span>
                         </button>
                     </div>
