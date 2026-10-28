@@ -50,8 +50,7 @@
                     @method('PUT')
                 @endif
 
-                <section class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md shadow-slate-900/5 sm:rounded-3xl">
-                    <div class="h-2 bg-cyan-400"></div>
+                <section class="relative overflow-hidden rounded-2xl border border-slate-200 border-l-4 border-l-cyan-400 bg-white shadow-md shadow-slate-900/5 transition hover:border-slate-300 hover:border-l-cyan-500 sm:rounded-3xl">
                     <div class="space-y-4 px-6 py-7 sm:px-8 sm:py-9">
                         <div>
                             <x-input-label for="title" value="Form title" class="sr-only" />
