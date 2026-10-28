@@ -67,7 +67,6 @@
 
                 <div class="flex flex-wrap items-end justify-between gap-3 px-1 pt-2">
                     <div>
-                        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-600">{{ __('Build your form') }}</p>
                         <h2 class="mt-1 text-xl font-semibold tracking-tight text-slate-950">{{ __('Questions') }} <span class="ms-1 text-sm font-medium text-slate-400" id="question-count">({{ count($builderQuestions) }})</span></h2>
                     </div>
                     <p class="text-xs text-slate-500">{{ __('Add at least one question to continue') }}</p>
