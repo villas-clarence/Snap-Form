@@ -50,8 +50,8 @@
                     @method('PUT')
                 @endif
 
-                <section class="relative overflow-hidden rounded-2xl border border-slate-200 border-l-4 border-l-cyan-400 bg-white shadow-md shadow-slate-900/5 transition hover:border-slate-300 hover:border-l-cyan-500 sm:rounded-3xl">
-                    <div class="space-y-4 px-6 py-7 sm:px-8 sm:py-9">
+                <section class="relative space-y-5 overflow-hidden rounded-2xl border border-slate-200 border-l-4 border-l-cyan-400 bg-white p-5 shadow-md shadow-slate-900/5 transition hover:border-slate-300 hover:border-l-cyan-500 sm:rounded-3xl sm:p-7">
+                    <div class="space-y-4">
                         <div>
                             <x-input-label for="title" value="Form title" class="sr-only" />
                             <x-text-input id="title" name="title" type="text" class="block w-full rounded-none border-0 border-b-2 border-slate-100 bg-transparent px-0 py-2 text-3xl font-medium tracking-tight text-slate-950 shadow-none placeholder:text-slate-400 focus:border-indigo-600 focus:ring-0 sm:text-4xl" :value="old('title', $form?->title)" placeholder="Untitled form" required maxlength="255" />
@@ -63,9 +63,8 @@
                             <x-input-error :messages="$errors->get('description')" class="mt-2" />
                         </div>
                     </div>
-                </section>
 
-                <div class="flex flex-wrap items-end justify-between gap-3 px-1 pt-2">
+                <div class="flex flex-wrap items-end justify-between gap-3">
                     <div>
                         <h2 class="mt-1 text-xl font-semibold tracking-tight text-slate-950">{{ __('Questions') }} <span class="ms-1 text-sm font-medium text-slate-400" id="question-count">({{ count($builderQuestions) }})</span></h2>
                     </div>
@@ -74,7 +73,7 @@
 
                 <div id="question-list" class="space-y-4">
                     @foreach ($builderQuestions as $index => $question)
-                        <section class="question-card relative z-0 space-y-5 rounded-2xl border border-slate-200 border-l-4 border-l-cyan-400 bg-white p-6 shadow-md shadow-slate-900/5 transition hover:border-slate-300 hover:border-l-cyan-500 sm:rounded-3xl sm:p-8">
+                        <section class="question-card relative z-0 space-y-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900/5 transition hover:border-slate-300 sm:rounded-3xl sm:p-8">
                             @if (! empty($question['id']))
                                 <input type="hidden" name="questions[{{ $index }}][id]" value="{{ $question['id'] }}">
                             @endif
@@ -116,9 +115,10 @@
                         </section>
                     @endforeach
                 </div>
+                </section>
 
                 <template id="question-template">
-                    <section class="question-card relative z-0 space-y-5 rounded-2xl border border-slate-200 border-l-4 border-l-cyan-400 bg-white p-6 shadow-md shadow-slate-900/5 transition hover:border-slate-300 hover:border-l-cyan-500 sm:rounded-3xl sm:p-8">
+                    <section class="question-card relative z-0 space-y-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900/5 transition hover:border-slate-300 sm:rounded-3xl sm:p-8">
                         <div class="flex items-center justify-between gap-4">
                             <div class="flex items-center gap-3">
                                 <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-50 text-sm font-bold text-indigo-700"><span class="question-number"></span></span>
