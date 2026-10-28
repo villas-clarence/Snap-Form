@@ -76,7 +76,7 @@
 
                 <div id="question-list" class="space-y-4">
                     @foreach ($builderQuestions as $index => $question)
-                        <section class="question-card relative space-y-5 overflow-hidden rounded-2xl border border-slate-200 border-l-4 border-l-indigo-500 bg-white p-6 shadow-md shadow-slate-900/5 transition hover:border-slate-300 hover:border-l-indigo-600 sm:rounded-3xl sm:p-8">
+                        <section class="question-card relative z-0 space-y-5 rounded-2xl border border-slate-200 border-l-4 border-l-indigo-500 bg-white p-6 shadow-md shadow-slate-900/5 transition hover:border-slate-300 hover:border-l-indigo-600 sm:rounded-3xl sm:p-8">
                             @if (! empty($question['id']))
                                 <input type="hidden" name="questions[{{ $index }}][id]" value="{{ $question['id'] }}">
                             @endif
@@ -98,11 +98,11 @@
                             <div class="grid gap-4 sm:grid-cols-2">
                                 <div>
                                     <x-input-label :for="'type-'.$index" value="Answer type" class="mb-2 text-sm font-semibold text-slate-700" />
-                                    <select id="type-{{ $index }}" name="questions[{{ $index }}][type]" class="question-type block w-full rounded-xl border-slate-200 py-3 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                        @foreach (['text' => 'Short text', 'textarea' => 'Long text', 'select' => 'Dropdown', 'radio' => 'Single choice', 'checkbox' => 'Multiple choice'] as $type => $label)
-                                            <option value="{{ $type }}" @selected(($question['type'] ?? 'text') === $type)>{{ $label }}</option>
-                                        @endforeach
-                                    </select>
+                                    @include('forms.partials.question-type-picker', [
+                                        'id' => 'type-'.$index,
+                                        'name' => 'questions['.$index.'][type]',
+                                        'type' => $question['type'] ?? 'text',
+                                    ])
                                 </div>
                                 <label class="flex min-h-[3.1rem] items-center gap-3 self-end rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-indigo-200 hover:bg-indigo-50/50">
                                     <input type="checkbox" name="questions[{{ $index }}][is_required]" value="1" @checked((bool) ($question['is_required'] ?? false)) class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">
@@ -120,7 +120,7 @@
                 </div>
 
                 <template id="question-template">
-                    <section class="question-card relative space-y-5 overflow-hidden rounded-2xl border border-slate-200 border-l-4 border-l-indigo-500 bg-white p-6 shadow-md shadow-slate-900/5 transition hover:border-slate-300 hover:border-l-indigo-600 sm:rounded-3xl sm:p-8">
+                    <section class="question-card relative z-0 space-y-5 rounded-2xl border border-slate-200 border-l-4 border-l-indigo-500 bg-white p-6 shadow-md shadow-slate-900/5 transition hover:border-slate-300 hover:border-l-indigo-600 sm:rounded-3xl sm:p-8">
                         <div class="flex items-center justify-between gap-4">
                             <div class="flex items-center gap-3">
                                 <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-50 text-sm font-bold text-indigo-700"><span class="question-number"></span></span>
@@ -138,13 +138,11 @@
                         <div class="grid gap-4 sm:grid-cols-2">
                             <div>
                                 <label for="type-__INDEX__" class="mb-2 block text-sm font-semibold text-slate-700">Answer type</label>
-                                <select id="type-__INDEX__" name="questions[__INDEX__][type]" class="question-type block w-full rounded-xl border-slate-200 py-3 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                    <option value="text">Short text</option>
-                                    <option value="textarea">Long text</option>
-                                    <option value="select">Dropdown</option>
-                                    <option value="radio">Single choice</option>
-                                    <option value="checkbox">Multiple choice</option>
-                                </select>
+                                @include('forms.partials.question-type-picker', [
+                                    'id' => 'type-__INDEX__',
+                                    'name' => 'questions[__INDEX__][type]',
+                                    'type' => 'text',
+                                ])
                             </div>
                             <label class="flex min-h-[3.1rem] items-center gap-3 self-end rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-indigo-200 hover:bg-indigo-50/50">
                                 <input type="checkbox" name="questions[__INDEX__][is_required]" value="1" class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">

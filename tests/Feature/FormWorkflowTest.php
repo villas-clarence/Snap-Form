@@ -43,7 +43,15 @@ class FormWorkflowTest extends TestCase
 
         $this->get(route('dashboard'))->assertOk()->assertSee('Workshop signup');
         $this->get(route('forms.show', $form))->assertOk()->assertSee('Session');
-        $this->get(route('forms.edit', $form))->assertOk()->assertSee('Workshop signup');
+        $this->get(route('forms.edit', $form))
+            ->assertOk()
+            ->assertSee('Workshop signup')
+            ->assertSee('Short answer')
+            ->assertSee('Paragraph')
+            ->assertSee('Multiple choice')
+            ->assertSee('Checkboxes')
+            ->assertSee('Dropdown')
+            ->assertSee('value="radio" selected', false);
         $this->get(route('forms.results', $form))->assertOk()->assertSee('No verified responses yet.');
 
         $firstQuestion = $form->questions[0];
@@ -81,6 +89,40 @@ class FormWorkflowTest extends TestCase
             ->assertOk()
             ->assertSee('What should we improve?')
             ->assertSee('Your email address');
+    }
+
+    public function test_checkbox_and_dropdown_questions_can_be_created_and_answered(): void
+    {
+        $owner = User::factory()->create();
+        $this->actingAs($owner)
+            ->post(route('forms.store'), [
+                'title' => 'Event preferences',
+                'questions' => [
+                    [
+                        'question_text' => 'Which sessions interest you?',
+                        'type' => 'checkbox',
+                        'options' => "Design\nEngineering",
+                    ],
+                    [
+                        'question_text' => 'Preferred time',
+                        'type' => 'select',
+                        'options' => "Morning\nAfternoon",
+                    ],
+                ],
+            ])
+            ->assertRedirect(route('dashboard'));
+
+        $form = Form::query()->where('title', 'Event preferences')->firstOrFail();
+        $this->assertSame(['checkbox', 'select'], $form->questions->pluck('type')->all());
+
+        $this->get(route('public.show', $form->slug))
+            ->assertOk()
+            ->assertSee('type="checkbox"', false)
+            ->assertSee('<select', false)
+            ->assertSee('Design')
+            ->assertSee('Engineering')
+            ->assertSee('Morning')
+            ->assertSee('Afternoon');
     }
 
     public function test_owner_cannot_view_another_users_form(): void
