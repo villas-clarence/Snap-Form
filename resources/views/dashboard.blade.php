@@ -25,7 +25,7 @@
                         <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">{{ __('Good to see you, :name', ['name' => auth()->user()->name]) }}</h1>
                         <p class="mt-3 max-w-xl text-sm leading-6 text-slate-300 sm:text-base">{{ __('Create forms, share them with your network, and keep track of every verified response.') }}</p>
                     </div>
-                    <a href="{{ route('forms.create') }}" class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-indigo-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-950/30 transition hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-slate-950">
+                    <a href="{{ route('forms.create') }}" class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-950/40 transition hover:from-indigo-400 hover:via-violet-400 hover:to-fuchsia-400 hover:shadow-violet-500/40 focus:outline-none focus:ring-2 focus:ring-violet-300 focus:ring-offset-2 focus:ring-offset-slate-950">
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                             <path d="M10 4v12m6-6H4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
                         </svg>
