@@ -24,6 +24,12 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <button type="button" data-theme-toggle aria-pressed="false" class="me-4 inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition hover:text-gray-700 focus:outline-none focus:text-gray-700" aria-label="Toggle dark mode">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span data-theme-toggle-label>Dark mode</span>
+                </button>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -86,6 +92,12 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                <button type="button" data-theme-toggle aria-pressed="false" class="flex w-full items-center gap-2 px-4 py-2 text-start text-sm font-medium text-gray-600 transition hover:text-gray-800 focus:outline-none" aria-label="Toggle dark mode">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span data-theme-toggle-label>Dark mode</span>
+                </button>
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>

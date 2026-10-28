@@ -8,27 +8,37 @@
 
 html.dark-mode body,
 html.dark-mode .min-h-screen {
-    background-color: #22262d;
+    background-color: #24272d;
 }
 
 html.dark-mode .bg-slate-50,
+html.dark-mode .bg-slate-100,
+html.dark-mode .bg-gray-50,
 html.dark-mode .bg-gray-100 {
-    background-color: #22262d;
+    background-color: #24272d;
 }
 
 html.dark-mode .bg-white,
 html.dark-mode .bg-white\/80 {
-    background-color: #30353d;
+    background-color: #30343b;
 }
 
 html.dark-mode .bg-gradient-to-br {
-    background-image: linear-gradient(135deg, #22262d, #292e36, #22262d);
+    background-image: linear-gradient(135deg, #24272d, #292d34, #24272d);
+}
+
+html.dark-mode .bg-indigo-50,
+html.dark-mode .bg-violet-50,
+html.dark-mode .bg-cyan-50,
+html.dark-mode .bg-emerald-50 {
+    background-color: #3a3b43;
 }
 
 html.dark-mode .text-slate-950,
 html.dark-mode .text-slate-900,
+html.dark-mode .text-gray-900,
 html.dark-mode .text-gray-800 {
-    color: #eceff2;
+    color: #e7e5e1;
 }
 
 html.dark-mode .text-slate-800,
@@ -38,32 +48,36 @@ html.dark-mode .text-slate-500,
 html.dark-mode .text-gray-700,
 html.dark-mode .text-gray-600,
 html.dark-mode .text-gray-500 {
-    color: #c1c7ce;
+    color: #bdc2c9;
 }
 
 html.dark-mode .border-slate-200,
 html.dark-mode .border-slate-100,
 html.dark-mode .border-gray-200,
 html.dark-mode .border-gray-100 {
-    border-color: #4a5059;
+    border-color: #464b53;
+}
+
+html.dark-mode {
+    color-scheme: dark;
 }
 
 html.dark-mode input:not([type="checkbox"]):not([type="radio"]),
 html.dark-mode select,
 html.dark-mode textarea {
-    background-color: #252a31;
-    color: #eceff2;
-    border-color: #4a5059;
+    background-color: #282c32;
+    color: #e7e5e1;
+    border-color: #464b53;
 }
 
 html.dark-mode input::placeholder,
 html.dark-mode textarea::placeholder {
-    color: #a5adb7;
+    color: #9da5af;
 }
 
 html.dark-mode nav {
-    background-color: #30353d;
-    border-color: #414750;
+    background-color: #30343b;
+    border-color: #41464e;
 }
 
 html.dark-mode nav a.text-gray-900,
@@ -84,5 +98,5 @@ html.dark-mode nav button:hover {
 
 html.dark-mode .hover\:bg-slate-50:hover,
 html.dark-mode .hover\:bg-gray-100:hover {
-    background-color: #3b414a;
+    background-color: #3a3f47;
 }

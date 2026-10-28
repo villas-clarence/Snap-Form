@@ -6,19 +6,23 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-const themeToggle = document.querySelector('[data-theme-toggle]');
+const themeToggles = document.querySelectorAll('[data-theme-toggle]');
 
-if (themeToggle) {
+if (themeToggles.length > 0) {
     const syncThemeToggle = () => {
         const isDark = document.documentElement.classList.contains('dark-mode');
-        themeToggle.setAttribute('aria-pressed', String(isDark));
-        themeToggle.querySelector('[data-theme-toggle-label]').textContent = isDark ? 'Light mode' : 'Dark mode';
+        themeToggles.forEach((themeToggle) => {
+            themeToggle.setAttribute('aria-pressed', String(isDark));
+            themeToggle.querySelector('[data-theme-toggle-label]').textContent = isDark ? 'Light mode' : 'Dark mode';
+        });
     };
 
     syncThemeToggle();
-    themeToggle.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.toggle('dark-mode');
-        localStorage.setItem('snapform-theme', isDark ? 'dark' : 'light');
-        syncThemeToggle();
+    themeToggles.forEach((themeToggle) => {
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.classList.toggle('dark-mode');
+            localStorage.setItem('snapform-theme', isDark ? 'dark' : 'light');
+            syncThemeToggle();
+        });
     });
 }
