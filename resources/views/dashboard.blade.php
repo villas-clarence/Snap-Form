@@ -172,16 +172,6 @@
                         @endforeach
                     </div>
 
-                    <div x-cloak x-show="!Array.from($el.previousElementSibling.querySelectorAll('article')).some(card => card.offsetParent !== null)" class="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
-                        <span class="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100 text-slate-500">
-                            <svg class="h-6 w-6" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                                <circle cx="8.75" cy="8.75" r="5.75" stroke="currentColor" stroke-width="1.5" />
-                                <path d="m13 13 3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                            </svg>
-                        </span>
-                        <h3 class="mt-4 text-base font-semibold text-slate-900">{{ __('No matching forms') }}</h3>
-                        <p class="mt-1 text-sm text-slate-500">{{ __('Try another search or choose a different filter.') }}</p>
-                    </div>
                 @else
                     <div class="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center shadow-sm">
                         <span class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600">
