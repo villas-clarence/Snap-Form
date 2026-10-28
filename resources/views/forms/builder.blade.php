@@ -39,10 +39,6 @@
                         </p>
                     </section>
                 </div>
-                <div class="hidden items-center gap-2 rounded-full border border-white/80 bg-white/80 px-4 py-2 text-xs font-medium text-slate-600 shadow-sm sm:inline-flex">
-                    <span class="h-2 w-2 rounded-full bg-emerald-500 ring-4 ring-emerald-100"></span>
-                    {{ __('Draft your form') }}
-                </div>
             </div>
 
             <div class="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_300px]">
