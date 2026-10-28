@@ -25,12 +25,20 @@
                         <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">{{ __('Good to see you, :name', ['name' => auth()->user()->name]) }}</h1>
                         <p class="mt-3 max-w-xl text-sm leading-6 text-slate-300 sm:text-base">{{ __('Create forms, share them with your network, and keep track of every verified response.') }}</p>
                     </div>
-                    <a href="{{ route('forms.create') }}" class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-cyan-200/70 bg-cyan-400 px-5 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-400/30 transition hover:border-cyan-100 hover:bg-cyan-300 hover:shadow-cyan-300/40 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950">
-                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                            <path d="M10 4v12m6-6H4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                        </svg>
-                        {{ __('Create a form') }}
-                    </a>
+                    <div class="flex flex-wrap gap-3">
+                        <button type="button" data-theme-toggle aria-pressed="false" class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950">
+                            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <span data-theme-toggle-label>Dark mode</span>
+                        </button>
+                        <a href="{{ route('forms.create') }}" class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-cyan-200/70 bg-cyan-400 px-5 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-400/30 transition hover:border-cyan-100 hover:bg-cyan-300 hover:shadow-cyan-300/40 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950">
+                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M10 4v12m6-6H4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                            </svg>
+                            {{ __('Create a form') }}
+                        </a>
+                    </div>
                 </div>
             </section>
 
