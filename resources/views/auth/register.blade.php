@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="mb-8">
-        <p class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-indigo-600">Get started for free</p>
-        <h2 class="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">{{ __('Create your account') }}</h2>
+        <p class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-cyan-400">Get started for free</p>
+        <h2 class="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">{{ __('Create your account') }}</h2>
         <p class="mt-3 text-sm leading-6 text-slate-500">{{ __('Set up your account to start creating and sharing forms.') }}</p>
     </div>
 
@@ -9,19 +9,19 @@
         @csrf
 
         <div>
-            <x-input-label for="name" :value="__('Full name')" class="mb-2 text-sm font-medium text-slate-700" />
+            <x-input-label for="name" :value="__('Full name')" class="mb-2 text-sm font-bold text-slate-700" />
             <x-text-input id="name" class="block w-full rounded-xl border-slate-200 px-4 py-3 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-indigo-500 focus:ring-indigo-500" type="text" name="name" :value="old('name')" placeholder="Alex Morgan" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
         <div>
-            <x-input-label for="email" :value="__('Email address')" class="mb-2 text-sm font-medium text-slate-700" />
+            <x-input-label for="email" :value="__('Email address')" class="mb-2 text-sm font-bold text-slate-700" />
             <x-text-input id="email" class="block w-full rounded-xl border-slate-200 px-4 py-3 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-indigo-500 focus:ring-indigo-500" type="email" name="email" :value="old('email')" placeholder="you@example.com" required autocomplete="email" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <div x-data="{ visible: false }">
-            <x-input-label for="password" :value="__('Password')" class="mb-2 text-sm font-medium text-slate-700" />
+            <x-input-label for="password" :value="__('Password')" class="mb-2 text-sm font-bold text-slate-700" />
             <div class="relative">
                 <x-text-input id="password" class="block w-full rounded-xl border-slate-200 px-4 py-3 pe-16 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-indigo-500 focus:ring-indigo-500"
                     x-bind:type="visible ? 'text' : 'password'"
@@ -33,7 +33,7 @@
         </div>
 
         <div x-data="{ visible: false }">
-            <x-input-label for="password_confirmation" :value="__('Confirm password')" class="mb-2 text-sm font-medium text-slate-700" />
+            <x-input-label for="password_confirmation" :value="__('Confirm password')" class="mb-2 text-sm font-bold text-slate-700" />
             <div class="relative">
                 <x-text-input id="password_confirmation" class="block w-full rounded-xl border-slate-200 px-4 py-3 pe-16 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-indigo-500 focus:ring-indigo-500"
                     x-bind:type="visible ? 'text' : 'password'"
