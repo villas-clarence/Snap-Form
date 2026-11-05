@@ -100,7 +100,7 @@
                                 <label class="flex min-h-[3.1rem] cursor-pointer items-center justify-between gap-3 self-end rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-indigo-200 hover:bg-indigo-50/50">
                                     <span>{{ __('Require an answer') }}</span>
                                     <input type="checkbox" name="questions[{{ $index }}][is_required]" value="1" @checked((bool) ($question['is_required'] ?? false)) class="peer sr-only">
-                                    <span aria-hidden="true" class="relative h-6 w-11 shrink-0 rounded-full bg-slate-300 transition after:absolute after:left-1 after:top-1 after:h-4 after:w-4 after:rounded-full after:bg-white after:shadow-sm after:transition after:content-[''] peer-checked:bg-indigo-600 peer-checked:after:translate-x-5 peer-focus-visible:ring-2 peer-focus-visible:ring-indigo-500 peer-focus-visible:ring-offset-2"></span>
+                                    <span aria-hidden="true" class="relative h-6 w-11 shrink-0 rounded-full bg-slate-300 transition after:absolute after:left-1 after:top-1 after:h-4 after:w-4 after:rounded-full after:bg-white after:shadow-sm after:transition after:content-[''] peer-checked:bg-cyan-500 peer-checked:after:translate-x-5 peer-focus-visible:ring-2 peer-focus-visible:ring-cyan-500 peer-focus-visible:ring-offset-2"></span>
                                 </label>
                             </div>
                             <div class="choice-options rounded-2xl border border-indigo-100 bg-indigo-50/50 p-4 @if (! in_array($question['type'] ?? 'text', ['select', 'radio', 'checkbox'], true)) hidden @endif">
@@ -140,7 +140,7 @@
                             <label class="flex min-h-[3.1rem] cursor-pointer items-center justify-between gap-3 self-end rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-indigo-200 hover:bg-indigo-50/50">
                                 <span>Require an answer</span>
                                 <input type="checkbox" name="questions[__INDEX__][is_required]" value="1" class="peer sr-only">
-                                <span aria-hidden="true" class="relative h-6 w-11 shrink-0 rounded-full bg-slate-300 transition after:absolute after:left-1 after:top-1 after:h-4 after:w-4 after:rounded-full after:bg-white after:shadow-sm after:transition after:content-[''] peer-checked:bg-indigo-600 peer-checked:after:translate-x-5 peer-focus-visible:ring-2 peer-focus-visible:ring-indigo-500 peer-focus-visible:ring-offset-2"></span>
+                                <span aria-hidden="true" class="relative h-6 w-11 shrink-0 rounded-full bg-slate-300 transition after:absolute after:left-1 after:top-1 after:h-4 after:w-4 after:rounded-full after:bg-white after:shadow-sm after:transition after:content-[''] peer-checked:bg-cyan-500 peer-checked:after:translate-x-5 peer-focus-visible:ring-2 peer-focus-visible:ring-cyan-500 peer-focus-visible:ring-offset-2"></span>
                             </label>
                         </div>
                         <div class="choice-options hidden rounded-2xl border border-indigo-100 bg-indigo-50/50 p-4">
@@ -153,7 +153,7 @@
 
                 <x-input-error :messages="$errors->get('questions')" />
                 <div class="flex flex-col-reverse justify-between gap-3 rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm sm:flex-row sm:items-center">
-                    <button id="add-question" type="button" class="inline-flex items-center justify-center gap-2 rounded-xl border border-indigo-200 bg-indigo-50 px-4 py-3 text-sm font-semibold text-indigo-700 transition hover:border-indigo-300 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    <button id="add-question" type="button" class="inline-flex items-center justify-center gap-2 rounded-xl border border-cyan-200 bg-cyan-50 px-4 py-3 text-sm font-semibold text-cyan-700 transition hover:border-cyan-300 hover:bg-cyan-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2">
                         <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                             <path d="M10 4v12m6-6H4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
                         </svg>
@@ -172,16 +172,15 @@
                 </form>
 
                 <aside class="space-y-5 lg:sticky lg:top-8">
-                    <section class="relative overflow-hidden rounded-3xl bg-slate-950 p-6 text-white shadow-xl shadow-slate-900/10">
-                        <div class="absolute -right-12 -top-14 h-40 w-40 rounded-full bg-indigo-500/25 blur-2xl"></div>
+                    <section class="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
                         <div class="relative">
-                            <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-cyan-300 ring-1 ring-white/10">
+                            <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-50 text-cyan-700">
                                 <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                     <path d="M12 3.75 14.3 9.7l5.95 2.3-5.95 2.3L12 20.25l-2.3-5.95-5.95-2.3 5.95-2.3L12 3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
                                 </svg>
                             </div>
-                            <h2 class="mt-5 text-lg font-semibold">{{ __('Make it easy to answer') }}</h2>
-                            <p class="mt-2 text-sm leading-6 text-slate-300">{{ __('A clear title and a short description help people understand why their answers matter.') }}</p>
+                            <h2 class="mt-5 text-lg font-semibold text-slate-950">{{ __('Make it easy to answer') }}</h2>
+                            <p class="mt-2 text-sm leading-6 text-slate-600">{{ __('A clear title and a short description help people understand why their answers matter.') }}</p>
                         </div>
                     </section>
 
