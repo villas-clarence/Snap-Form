@@ -7,8 +7,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-slate-950 text-white">
-    <main class="mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-6 py-16">
-        <div class="max-w-3xl">
+    <main class="home-animated-background relative isolate mx-auto flex min-h-screen max-w-6xl flex-col justify-center overflow-hidden px-6 py-16">
+        <div class="relative z-10 max-w-3xl">
             <h1 class="mt-5 text-5xl font-bold tracking-tight sm:text-7xl">Create forms.<br><span class="text-cyan-300">Collect answers.</span></h1>
             <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300">Snap Form helps you build forms and collect email-verified responses from devices on your local network.</p>
             <div class="mt-9 flex flex-wrap gap-3">
