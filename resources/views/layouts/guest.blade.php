@@ -21,17 +21,6 @@
                     <div class="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl"></div>
                     <div class="absolute -bottom-40 -left-32 h-96 w-96 rounded-full bg-cyan-400/10 blur-3xl"></div>
 
-                    <a href="/" class="relative inline-flex w-fit items-center gap-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300">
-                        <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-indigo-500 text-white shadow-lg shadow-indigo-950/40">
-                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M7 4.75h10A2.25 2.25 0 0 1 19.25 7v10A2.25 2.25 0 0 1 17 19.25H7A2.25 2.25 0 0 1 4.75 17V7A2.25 2.25 0 0 1 7 4.75Z" stroke="currentColor" stroke-width="1.7" />
-                                <path d="M8.5 9h7M8.5 12h7M8.5 15h3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
-                                <path d="m15.4 15.1 1.1 1.1 2.2-2.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </span>
-                        <span class="text-xl font-semibold tracking-tight">SnapForm</span>
-                    </a>
-
                     <div class="relative my-12">
                         <p class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium tracking-wide text-indigo-200">
                             <span class="h-1.5 w-1.5 rounded-full bg-cyan-300"></span>
@@ -71,16 +60,6 @@
 
                 <main class="flex items-center justify-center px-6 py-10 sm:px-12 lg:px-14 xl:px-20">
                     <div class="w-full max-w-md">
-                        <a href="/" class="mb-10 inline-flex items-center gap-2.5 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 lg:hidden">
-                            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
-                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                    <path d="M7 4.75h10A2.25 2.25 0 0 1 19.25 7v10A2.25 2.25 0 0 1 17 19.25H7A2.25 2.25 0 0 1 4.75 17V7A2.25 2.25 0 0 1 7 4.75Z" stroke="currentColor" stroke-width="1.7" />
-                                    <path d="M8.5 9h7M8.5 12h7M8.5 15h3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
-                                </svg>
-                            </span>
-                            <span class="text-lg font-semibold tracking-tight">SnapForm</span>
-                        </a>
-
                         {{ $slot }}
                     </div>
                 </main>
