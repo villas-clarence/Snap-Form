@@ -71,6 +71,13 @@
 
                 <div id="question-list" class="space-y-4">
                     @foreach ($builderQuestions as $index => $question)
+                        @php
+                            $choiceOptions = is_array($question['options'] ?? null)
+                                ? $question['options']
+                                : (preg_split('/\r\n|\r|\n/', $question['options'] ?? '') ?: []);
+                            $choiceOptions = $choiceOptions ?: [''];
+                            $questionType = $question['type'] ?? 'text';
+                        @endphp
                         <section class="question-card relative z-0 space-y-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900/5 transition hover:border-slate-300 sm:rounded-3xl sm:p-8">
                             @if (! empty($question['id']))
                                 <input type="hidden" name="questions[{{ $index }}][id]" value="{{ $question['id'] }}">
@@ -97,20 +104,46 @@
                                         'type' => $question['type'] ?? 'text',
                                     ])
                                 </div>
-                                <label class="flex min-h-[3.1rem] cursor-pointer items-center justify-between gap-3 self-end rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-indigo-200 hover:bg-indigo-50/50">
+                                <label class="flex min-h-[3.1rem] cursor-pointer items-center justify-between gap-3 self-end rounded-xl border border-cyan-200 bg-cyan-50 px-4 py-3 text-sm font-medium text-cyan-700 transition hover:border-cyan-300 hover:bg-cyan-100">
                                     <span>{{ __('Require an answer') }}</span>
                                     <input type="checkbox" name="questions[{{ $index }}][is_required]" value="1" @checked((bool) ($question['is_required'] ?? false)) class="peer sr-only">
-                                    <span aria-hidden="true" class="relative h-6 w-11 shrink-0 rounded-full bg-slate-300 transition after:absolute after:left-1 after:top-1 after:h-4 after:w-4 after:rounded-full after:bg-white after:shadow-sm after:transition after:content-[''] peer-checked:bg-cyan-500 peer-checked:after:translate-x-5 peer-focus-visible:ring-2 peer-focus-visible:ring-cyan-500 peer-focus-visible:ring-offset-2"></span>
+                                    <span aria-hidden="true" class="relative h-6 w-11 shrink-0 rounded-full bg-cyan-200 transition after:absolute after:left-1 after:top-1 after:h-4 after:w-4 after:rounded-full after:bg-white after:shadow-sm after:transition after:content-[''] peer-checked:bg-cyan-500 peer-checked:after:translate-x-5 peer-focus-visible:ring-2 peer-focus-visible:ring-cyan-500 peer-focus-visible:ring-offset-2"></span>
                                 </label>
                             </div>
-                            <div class="choice-options rounded-2xl border border-indigo-100 bg-indigo-50/50 p-4 @if (! in_array($question['type'] ?? 'text', ['select', 'radio', 'checkbox'], true)) hidden @endif">
-                                <x-input-label :for="'options-'.$index" value="Choices (one per line)" class="mb-2 text-sm font-semibold text-slate-700" />
-                                <textarea id="options-{{ $index }}" name="questions[{{ $index }}][options]" rows="4" placeholder="One option per line" class="block w-full resize-none rounded-xl border-slate-200 bg-white px-4 py-3 text-sm shadow-sm placeholder:text-slate-400 focus:border-indigo-500 focus:ring-indigo-500">{{ is_array($question['options'] ?? null) ? implode("\n", $question['options']) : ($question['options'] ?? '') }}</textarea>
-                                <p class="mt-2 text-xs text-slate-500">{{ __('Each line becomes a choice respondents can select.') }}</p>
+                            <div class="choice-options rounded-2xl border border-cyan-100 bg-cyan-50/40 p-4 @if (! in_array($questionType, ['select', 'radio', 'checkbox'], true)) hidden @endif">
+                                <div class="multiple-choice-editor @if ($questionType !== 'radio') hidden @endif">
+                                    <div class="multiple-choice-list space-y-3">
+                                        @foreach ($choiceOptions as $optionIndex => $option)
+                                            <div class="multiple-choice-row flex items-center gap-3">
+                                                <span aria-hidden="true" class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-slate-400">
+                                                    <span class="h-2 w-2 rounded-full bg-transparent"></span>
+                                                </span>
+                                                <input type="text" value="{{ $option }}" placeholder="Option {{ $optionIndex + 1 }}" aria-label="Option {{ $optionIndex + 1 }}" maxlength="255" class="multiple-choice-input block min-w-0 flex-1 rounded-none border-0 border-b border-slate-200 bg-transparent px-1 py-2 text-sm text-slate-800 shadow-none placeholder:text-slate-400 focus:border-cyan-500 focus:ring-0">
+                                                <button type="button" class="remove-choice-option rounded-lg px-2 py-1 text-xs font-medium text-slate-500 transition hover:bg-cyan-100 hover:text-cyan-800 focus:outline-none focus:ring-2 focus:ring-cyan-500" aria-label="Remove option {{ $optionIndex + 1 }}">×</button>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+                                        <button type="button" class="add-choice-option font-medium text-cyan-700 hover:text-cyan-900 focus:outline-none focus:underline">{{ __('Add option') }}</button>
+                                        <span class="text-slate-500">{{ __('or') }}</span>
+                                        <button type="button" class="add-other-option font-medium text-cyan-700 hover:text-cyan-900 focus:outline-none focus:underline">{{ __('add "Other"') }}</button>
+                                    </div>
+                                </div>
+                                <x-input-label :for="'options-'.$index" value="Choices (one per line)" class="choice-options-label mb-2 text-sm font-semibold text-slate-700 @if ($questionType === 'radio') hidden @endif" />
+                                <textarea id="options-{{ $index }}" name="questions[{{ $index }}][options]" rows="4" placeholder="One option per line" @disabled(! in_array($questionType, ['select', 'radio', 'checkbox'], true)) class="choice-options-value block w-full resize-none rounded-xl border-slate-200 bg-white px-4 py-3 text-sm shadow-sm placeholder:text-slate-400 focus:border-cyan-500 focus:ring-cyan-500 @if ($questionType === 'radio') hidden @endif">{{ implode("\n", $choiceOptions === [''] ? [] : $choiceOptions) }}</textarea>
+                                <p class="choice-options-hint mt-2 text-xs text-slate-500 @if ($questionType === 'radio') hidden @endif">{{ __('Each line becomes a choice respondents can select.') }}</p>
                                 <x-input-error :messages="$errors->get('questions.'.$index.'.options')" class="mt-2" />
                             </div>
                         </section>
                     @endforeach
+                </div>
+                <div class="flex justify-end pt-2">
+                    <button id="add-question" type="button" class="inline-flex items-center justify-center gap-2 rounded-xl border border-cyan-200 bg-cyan-50 px-4 py-3 text-sm font-semibold text-cyan-700 transition hover:border-cyan-300 hover:bg-cyan-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2">
+                        <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                            <path d="M10 4v12m6-6H4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                        </svg>
+                        {{ __('Add a question') }}
+                    </button>
                 </div>
                 </section>
 
@@ -137,37 +170,48 @@
                                     'type' => 'text',
                                 ])
                             </div>
-                            <label class="flex min-h-[3.1rem] cursor-pointer items-center justify-between gap-3 self-end rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-indigo-200 hover:bg-indigo-50/50">
+                            <label class="flex min-h-[3.1rem] cursor-pointer items-center justify-between gap-3 self-end rounded-xl border border-cyan-200 bg-cyan-50 px-4 py-3 text-sm font-medium text-cyan-700 transition hover:border-cyan-300 hover:bg-cyan-100">
                                 <span>Require an answer</span>
                                 <input type="checkbox" name="questions[__INDEX__][is_required]" value="1" class="peer sr-only">
-                                <span aria-hidden="true" class="relative h-6 w-11 shrink-0 rounded-full bg-slate-300 transition after:absolute after:left-1 after:top-1 after:h-4 after:w-4 after:rounded-full after:bg-white after:shadow-sm after:transition after:content-[''] peer-checked:bg-cyan-500 peer-checked:after:translate-x-5 peer-focus-visible:ring-2 peer-focus-visible:ring-cyan-500 peer-focus-visible:ring-offset-2"></span>
+                                <span aria-hidden="true" class="relative h-6 w-11 shrink-0 rounded-full bg-cyan-200 transition after:absolute after:left-1 after:top-1 after:h-4 after:w-4 after:rounded-full after:bg-white after:shadow-sm after:transition after:content-[''] peer-checked:bg-cyan-500 peer-checked:after:translate-x-5 peer-focus-visible:ring-2 peer-focus-visible:ring-cyan-500 peer-focus-visible:ring-offset-2"></span>
                             </label>
                         </div>
-                        <div class="choice-options hidden rounded-2xl border border-indigo-100 bg-indigo-50/50 p-4">
-                            <label for="options-__INDEX__" class="mb-2 block text-sm font-semibold text-slate-700">Choices (one per line)</label>
-                            <textarea id="options-__INDEX__" name="questions[__INDEX__][options]" rows="4" placeholder="One option per line" class="block w-full resize-none rounded-xl border-slate-200 bg-white px-4 py-3 text-sm shadow-sm placeholder:text-slate-400 focus:border-indigo-500 focus:ring-indigo-500"></textarea>
-                            <p class="mt-2 text-xs text-slate-500">Each line becomes a choice respondents can select.</p>
+                        <div class="choice-options hidden rounded-2xl border border-cyan-100 bg-cyan-50/40 p-4">
+                            <div class="multiple-choice-editor hidden">
+                                <div class="multiple-choice-list space-y-3">
+                                    <div class="multiple-choice-row flex items-center gap-3">
+                                        <span aria-hidden="true" class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-slate-400">
+                                            <span class="h-2 w-2 rounded-full bg-transparent"></span>
+                                        </span>
+                                        <input type="text" placeholder="Option 1" aria-label="Option 1" maxlength="255" class="multiple-choice-input block min-w-0 flex-1 rounded-none border-0 border-b border-slate-200 bg-transparent px-1 py-2 text-sm text-slate-800 shadow-none placeholder:text-slate-400 focus:border-cyan-500 focus:ring-0">
+                                        <button type="button" class="remove-choice-option rounded-lg px-2 py-1 text-xs font-medium text-slate-500 transition hover:bg-cyan-100 hover:text-cyan-800 focus:outline-none focus:ring-2 focus:ring-cyan-500" aria-label="Remove option 1">×</button>
+                                    </div>
+                                </div>
+                                <div class="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+                                    <button type="button" class="add-choice-option font-medium text-cyan-700 hover:text-cyan-900 focus:outline-none focus:underline">Add option</button>
+                                    <span class="text-slate-500">or</span>
+                                    <button type="button" class="add-other-option font-medium text-cyan-700 hover:text-cyan-900 focus:outline-none focus:underline">add "Other"</button>
+                                </div>
+                            </div>
+                            <label for="options-__INDEX__" class="choice-options-label mb-2 block text-sm font-semibold text-slate-700">Choices (one per line)</label>
+                            <textarea id="options-__INDEX__" name="questions[__INDEX__][options]" rows="4" disabled placeholder="One option per line" class="choice-options-value block w-full resize-none rounded-xl border-slate-200 bg-white px-4 py-3 text-sm shadow-sm placeholder:text-slate-400 focus:border-cyan-500 focus:ring-cyan-500"></textarea>
+                            <p class="choice-options-hint mt-2 text-xs text-slate-500">Each line becomes a choice respondents can select.</p>
+                            <p class="mt-2 text-xs text-rose-600" data-options-error></p>
                         </div>
                     </section>
                 </template>
 
                 <x-input-error :messages="$errors->get('questions')" />
-                <div class="flex flex-col-reverse justify-between gap-3 rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm sm:flex-row sm:items-center">
-                    <button id="add-question" type="button" class="inline-flex items-center justify-center gap-2 rounded-xl border border-cyan-200 bg-cyan-50 px-4 py-3 text-sm font-semibold text-cyan-700 transition hover:border-cyan-300 hover:bg-cyan-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2">
-                        <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                            <path d="M10 4v12m6-6H4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                        </svg>
-                        {{ __('Add a question') }}
-                    </button>
-                    @if ($form)
+                @if ($form)
+                    <div class="flex justify-end rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm">
                         <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                             {{ __('Save changes') }}
                             <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                                 <path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </button>
-                    @endif
-                </div>
+                    </div>
+                @endif
 
                 </form>
 
@@ -188,11 +232,11 @@
                         <h2 class="text-sm font-semibold text-slate-950">{{ __('A few quick tips') }}</h2>
                         <ul class="mt-4 space-y-4">
                             <li class="flex gap-3">
-                                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-xs font-bold text-indigo-700">1</span>
+                                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-cyan-50 text-xs font-bold text-cyan-700">1</span>
                                 <p class="pt-1 text-sm leading-5 text-slate-600">{{ __('Keep each question focused on one thing.') }}</p>
                             </li>
                             <li class="flex gap-3">
-                                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-violet-50 text-xs font-bold text-violet-700">2</span>
+                                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-cyan-50 text-xs font-bold text-cyan-700">2</span>
                                 <p class="pt-1 text-sm leading-5 text-slate-600">{{ __('Use choice questions when answers should be consistent.') }}</p>
                             </li>
                             <li class="flex gap-3">
@@ -202,12 +246,12 @@
                         </ul>
                     </section>
 
-                    <div class="flex items-start gap-3 rounded-2xl border border-indigo-100 bg-indigo-50/70 p-4">
-                        <svg class="mt-0.5 h-5 w-5 shrink-0 text-indigo-600" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <div class="flex items-start gap-3 rounded-2xl border border-cyan-100 bg-cyan-50/70 p-4">
+                        <svg class="mt-0.5 h-5 w-5 shrink-0 text-cyan-600" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                             <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5" />
                             <path d="M10 9v4m0-6h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                         </svg>
-                        <p class="text-xs leading-5 text-indigo-900">{{ __('Responses are kept pending until respondents verify their email address.') }}</p>
+                        <p class="text-xs leading-5 text-cyan-900">{{ __('Responses are kept pending until respondents verify their email address.') }}</p>
                     </div>
                 </aside>
             </div>
@@ -228,17 +272,90 @@
 
             const updateOptionsVisibility = (card) => {
                 const type = card.querySelector('.question-type').value;
-                card.querySelector('.choice-options').classList.toggle('hidden', !['select', 'radio', 'checkbox'].includes(type));
+                const isChoiceType = ['select', 'radio', 'checkbox'].includes(type);
+                const isMultipleChoice = type === 'radio';
+                card.querySelector('.choice-options').classList.toggle('hidden', !isChoiceType);
+                card.querySelector('.multiple-choice-editor').classList.toggle('hidden', !isMultipleChoice);
+                card.querySelector('.choice-options-label').classList.toggle('hidden', isMultipleChoice);
+                card.querySelector('.choice-options-hint').classList.toggle('hidden', isMultipleChoice);
+                card.querySelector('.choice-options-value').classList.toggle('hidden', isMultipleChoice);
+                card.querySelector('.choice-options-value').disabled = !isChoiceType;
+                card.dataset.questionType = type;
             };
+
+            const syncMultipleChoiceOptions = (card) => {
+                const values = [...card.querySelectorAll('.multiple-choice-input')]
+                    .map((input) => input.value.trim())
+                    .filter((value) => value !== '');
+                card.querySelector('.choice-options-value').value = values.join('\n');
+            };
+
+            const renderMultipleChoiceOptions = (card, values) => {
+                const optionList = card.querySelector('.multiple-choice-list');
+                optionList.replaceChildren();
+                (values.length ? values : ['']).forEach((value, index) => {
+                    const row = document.createElement('div');
+                    row.className = 'multiple-choice-row flex items-center gap-3';
+                    row.innerHTML = '<span aria-hidden="true" class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-slate-400"><span class="h-2 w-2 rounded-full bg-transparent"></span></span>';
+
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = value;
+                    input.placeholder = `Option ${index + 1}`;
+                    input.setAttribute('aria-label', `Option ${index + 1}`);
+                    input.maxLength = 255;
+                    input.className = 'multiple-choice-input block min-w-0 flex-1 rounded-none border-0 border-b border-slate-200 bg-transparent px-1 py-2 text-sm text-slate-800 shadow-none placeholder:text-slate-400 focus:border-cyan-500 focus:ring-0';
+                    row.append(input);
+
+                    const removeButton = document.createElement('button');
+                    removeButton.type = 'button';
+                    removeButton.className = 'remove-choice-option rounded-lg px-2 py-1 text-xs font-medium text-slate-500 transition hover:bg-cyan-100 hover:text-cyan-800 focus:outline-none focus:ring-2 focus:ring-cyan-500';
+                    removeButton.setAttribute('aria-label', `Remove option ${index + 1}`);
+                    removeButton.textContent = '×';
+                    row.append(removeButton);
+                    optionList.append(row);
+                });
+            };
+
+            const addMultipleChoiceOption = (card, value = '') => {
+                const values = [...card.querySelectorAll('.multiple-choice-input')].map((input) => input.value);
+                values.push(value);
+                renderMultipleChoiceOptions(card, values);
+                syncMultipleChoiceOptions(card);
+                card.querySelectorAll('.multiple-choice-input').at(-1).focus();
+            };
+
+            list.querySelectorAll('.question-card').forEach((card) => {
+                card.dataset.questionType = card.querySelector('.question-type').value;
+            });
 
             document.getElementById('add-question').addEventListener('click', () => {
                 const html = template.innerHTML.replaceAll('__INDEX__', String(nextIndex++));
                 list.insertAdjacentHTML('beforeend', html);
                 window.Alpine.initTree(list.lastElementChild);
+                list.lastElementChild.dataset.questionType = list.lastElementChild.querySelector('.question-type').value;
                 refreshQuestions();
             });
 
             list.addEventListener('click', (event) => {
+                const card = event.target.closest('.question-card');
+                if (card && event.target.closest('.add-choice-option')) {
+                    addMultipleChoiceOption(card);
+                }
+                if (card && event.target.closest('.add-other-option')) {
+                    addMultipleChoiceOption(card, 'Other');
+                }
+                if (card && event.target.closest('.remove-choice-option')) {
+                    const optionInputs = card.querySelectorAll('.multiple-choice-input');
+                    if (optionInputs.length > 1) {
+                        event.target.closest('.multiple-choice-row').remove();
+                        syncMultipleChoiceOptions(card);
+                        renderMultipleChoiceOptions(card, [...card.querySelectorAll('.multiple-choice-input')].map((input) => input.value));
+                    } else {
+                        optionInputs[0].value = '';
+                        syncMultipleChoiceOptions(card);
+                    }
+                }
                 if (event.target.closest('.remove-question')) {
                     const cards = list.querySelectorAll('.question-card');
                     if (cards.length > 1) {
@@ -250,8 +367,30 @@
 
             list.addEventListener('change', (event) => {
                 if (event.target.matches('.question-type')) {
-                    updateOptionsVisibility(event.target.closest('.question-card'));
+                    const card = event.target.closest('.question-card');
+                    const previousType = card.dataset.questionType;
+                    if (previousType === 'radio') {
+                        syncMultipleChoiceOptions(card);
+                    }
+                    if (event.target.value === 'radio') {
+                        renderMultipleChoiceOptions(card, card.querySelector('.choice-options-value').value.split(/\r\n|\r|\n/).filter((value) => value.trim() !== ''));
+                    }
+                    updateOptionsVisibility(card);
                 }
+            });
+
+            list.addEventListener('input', (event) => {
+                if (event.target.matches('.multiple-choice-input')) {
+                    syncMultipleChoiceOptions(event.target.closest('.question-card'));
+                }
+            });
+
+            list.closest('form').addEventListener('submit', () => {
+                list.querySelectorAll('.question-card').forEach((card) => {
+                    if (card.querySelector('.question-type').value === 'radio') {
+                        syncMultipleChoiceOptions(card);
+                    }
+                });
             });
         })();
     </script>
